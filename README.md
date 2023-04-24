@@ -16,3 +16,6 @@ fore the model of the treasure chest
 https://assetstore.unity.com/packages/3d/props/interior/treasure-set-free-chest-72345
 
  
+Fantasy Wooden GUI  from the asset store 
+for the GUI elements
+https://assetstore.unity.com/packages/2d/gui/fantasy-wooden-gui-free-103811
