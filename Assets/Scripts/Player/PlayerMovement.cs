@@ -18,7 +18,11 @@ namespace Scripts.Player
 		[SerializeField]
 		private float runSpeed;
 
+		[SerializeField]
+		private LayerMask groundClickLayer;
+
 		private NavMeshAgent navMeshAgent;
+
 
 		private void OnEnable()
 		{
@@ -50,12 +54,15 @@ namespace Scripts.Player
 			{
 				if (Input.GetMouseButtonDown(0))
 				{
+					Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 					RaycastHit hit;
 
-					if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
+					if (Physics.Raycast(ray, out hit, Mathf.Infinity))
 					{
+						Debug.Log("<color=red>"+ hit.point + "</color>");
 						navMeshAgent.updateRotation = true;
 						navMeshAgent.destination = hit.point;
+						target.position = hit.point;
 					}
 				}
 			}
