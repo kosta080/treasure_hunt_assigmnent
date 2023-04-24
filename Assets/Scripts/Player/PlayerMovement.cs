@@ -17,6 +17,8 @@ namespace Scripts.Player
 
 		[SerializeField]
 		private float runSpeed;
+		[SerializeField]
+		private float rotateSpeed;
 
 		[SerializeField]
 		private LayerMask groundClickLayer;
@@ -44,7 +46,7 @@ namespace Scripts.Player
 
 			if (inputMethod == inpotMethods.keyboard)
 			{
-				transform.Rotate(new Vector3(0f, playerControlls.ReadValue<Vector2>().x * 5f, 0f), Space.Self);
+				transform.Rotate(new Vector3(0f, playerControlls.ReadValue<Vector2>().x * rotateSpeed, 0f), Space.Self);
 
 				navMeshAgent.updateRotation = false;
 				navMeshAgent.destination = transform.position + (transform.forward * playerControlls.ReadValue<Vector2>().y * runSpeed);
@@ -59,7 +61,7 @@ namespace Scripts.Player
 
 					if (Physics.Raycast(ray, out hit, Mathf.Infinity))
 					{
-						Debug.Log("<color=red>"+ hit.point + "</color>");
+						//Debug.Log("<color=red>"+ hit.point + "</color>");
 						navMeshAgent.updateRotation = true;
 						navMeshAgent.destination = hit.point;
 						target.position = hit.point;

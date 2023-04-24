@@ -3,18 +3,11 @@ using UnityEngine;
 
 namespace Scripts.Gameloop
 {
-    public class treasureController : MonoBehaviour
+    public class TreasureController : MonoBehaviour
     {
         private List<Transform> treasureChests = new List<Transform>();
 
-        private int randomChest;
-        private int randomChestStore;
-
-        public void ShowRandomChest()
-        {
-            hideAllChests();
-            showRandomChest();
-        }
+        
         private void Start()
         {
             foreach (Transform childObject in transform)
@@ -35,16 +28,11 @@ namespace Scripts.Gameloop
                 treasureChests[i].gameObject.SetActive(false);
             }
         }
-        private void showRandomChest()
+        public void ShowRandomChest(int randomChest)
         {
-            //generate random number that is different from the previously generated one
-            while (randomChestStore == randomChest)
-            {
-                randomChest = Random.Range(0, treasureChests.Count);
-            }
-            randomChestStore = randomChest;
-
             treasureChests[randomChest].gameObject.SetActive(true);
         }
+
+        public int ChestCount => treasureChests.Count;
     }
 }
