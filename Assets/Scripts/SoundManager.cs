@@ -7,19 +7,24 @@ namespace Scripts.Infra
 {
     public class SoundManager : MonoBehaviour
     {
+        [Header("Audio sources")]
+        public AudioSource musicAudioSource;
+        public AudioSource soundeffectsAudioSource;
+
+        [Header("Audio clips")]
+        public AudioClip music;
+        public AudioClip chestOpening;
+
         //private chestPickability _chestPickability;
         void Start()
         {
-            
-            //Debug.Log(GameObject.FindObjectsOfType<chestPickability>().Length);
-            //Debug.Log(GameObject.FindObjectsOfType<chestPickability>());
-            //_chestPickability = GameObject.FindObjectsOfType<chestPickability>()[0];
+            musicAudioSource.PlayOneShot(music);
             chestPickability.TreasureFound += playCollectSound;
         }
 
         private void playCollectSound()
         {
-            Debug.Log("hu playCollectSound ");
+            soundeffectsAudioSource.PlayOneShot(chestOpening);
         }
     }
 }

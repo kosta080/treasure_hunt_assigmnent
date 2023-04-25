@@ -33,7 +33,7 @@ namespace Scripts.Gameloop
            
             //Session preperation
             chestCount = treasureController.ChestCount;
-            chestPickability.TreasureFound += prepareRoundInDelay;
+            chestPickability.TreasureFound += handleTreasureFound;
             roundData.RoundNumber = 0;
 
             //Impliment game settings
@@ -45,8 +45,9 @@ namespace Scripts.Gameloop
             //Round Preperation
             prepareRound();
         }
-        private void prepareRoundInDelay()
+        private void handleTreasureFound()
         {
+            GiveTimeBonus();
             StartCoroutine(waitAndPrepareRound());
         }
         private IEnumerator waitAndPrepareRound()
@@ -103,7 +104,10 @@ namespace Scripts.Gameloop
             {
                 roundTimer.text = totalSeconds.ToString();
             }
-
+        }
+        private void GiveTimeBonus()
+        {
+            sessionTime += timeBonus;
         }
 	}
 }

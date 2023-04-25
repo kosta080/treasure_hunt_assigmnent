@@ -32,6 +32,9 @@ namespace Scripts.Player
 		private Animator characterAnimator;
 
 		[SerializeField]
+		private AudioSource characterAudioSource;
+
+		[SerializeField]
 		private GameObject StartPosition;
 
 		[SerializeField]
@@ -63,6 +66,7 @@ namespace Scripts.Player
 			float speed = Vector3.Distance(transform.position, lastPosition) / Time.deltaTime;
 			lastPosition = transform.position;
 			characterAnimator.SetBool("Run", speed > 0.01);
+			characterAudioSource.enabled = speed > 0.01;
 
 			if (PopupSystem.Instance.activePopup) return;
 
@@ -83,7 +87,9 @@ namespace Scripts.Player
 
 					if (Physics.Raycast(ray, out hit, Mathf.Infinity))
 					{
-						//Debug.Log("<color=red>"+ hit.point + "</color>");
+						if (hit.transform.tag != "WalkTarget")
+							return;
+
 						navMeshAgent.updateRotation = true;
 						navMeshAgent.destination = hit.point;
 						targetPin.position = hit.point;
