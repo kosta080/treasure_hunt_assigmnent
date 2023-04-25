@@ -11,10 +11,20 @@ public class RoundPopupFill : MonoBehaviour
 
     [SerializeField]
     private RoundDataModel roundData;
+
+    [SerializeField]
+    private Image hingImageElement;
+
+    [SerializeField]
+    private Sprite[] hintImages;
+
+
     void Start()
     {
 		headerText.text = "Round "+roundData.RoundNumber.ToString();
         hintText.text = "Hint "+ roundData.ChestIndex.ToString();
+
+        hingImageElement.sprite = hintImages[roundData.ChestIndex];
     }
 
     

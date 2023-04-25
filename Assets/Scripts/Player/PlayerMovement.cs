@@ -21,11 +21,7 @@ namespace Scripts.Player
 		[SerializeField]
 		private float rotateSpeed;
 
-		[SerializeField]
-		private LayerMask groundClickLayer;
-
 		private NavMeshAgent navMeshAgent;
-
 
 		private void OnEnable()
 		{

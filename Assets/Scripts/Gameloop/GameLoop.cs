@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,7 +28,7 @@ namespace Scripts.Gameloop
         {
             //Session preperation
             chestCount = treasureController.ChestCount;
-            chestPickability.TreasureFound += prepareRound;
+            chestPickability.TreasureFound += prepareRoundInDelay;
             roundData.RoundNumber = 0;
 
             //Impliment game settings
@@ -39,13 +40,22 @@ namespace Scripts.Gameloop
             //Round Preperation
             prepareRound();
         }
-
+        private void prepareRoundInDelay()
+        {
+            StartCoroutine(waitAndPrepareRound());
+        }
+        private IEnumerator waitAndPrepareRound()
+        {
+            yield return new WaitForSeconds(2f);
+            prepareRound();
+        }
         private void prepareRound()
         {
             chooseRandomChest();
+            roundData.ChestIndex = randomChest;
             roundData.IncreaseRoundNumber();
             treasureController.hideAllChests();
-            treasureController.ShowRandomChest(randomChest);
+            treasureController.ShowRandomChest(roundData.ChestIndex);
 
             //Derived from game settings
             if (ShowHintPopups)
@@ -59,7 +69,7 @@ namespace Scripts.Gameloop
             //generate random number that is different from the previously generated one
             while (randomChestStore == randomChest)
             {
-                randomChest = Random.Range(0, chestCount);
+                randomChest = Random.Range(0, 2);
             }
             randomChestStore = randomChest;
         }

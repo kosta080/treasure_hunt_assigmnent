@@ -3501,7 +3501,7 @@ MonoBehaviour:
   roundData: {fileID: 11400000, guid: 524036f089ab84f47a2ecbffb2ef7b58, type: 2}
   roundTimer: {fileID: 545781354}
   FogOfWar: {fileID: 1686778901}
-  ShowHintPopups: 1
+  ShowHintPopups: 0
   EnableFogOfWar: 0
 --- !u!1001 &468995468
 PrefabInstance:
@@ -14285,12 +14285,12 @@ MonoBehaviour:
     m_Name: Player Controlls
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 5f080394-0b6c-4ba6-8928-ffe8af11e4c8
+    m_Id: 404f2b4c-7f42-456e-940c-5f2f84515ba2
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings:
-    - m_Name: 2D Vector
-      m_Id: b51ec5fa-ba20-4a5a-88e4-62cc4c75de63
+    - m_Name: 2D Vector wasd
+      m_Id: 6d06c419-15b9-40dc-88dd-98d9f2082ab3
       m_Path: 2DVector
       m_Interactions: 
       m_Processors: 
@@ -14298,7 +14298,7 @@ MonoBehaviour:
       m_Action: Player Controlls
       m_Flags: 4
     - m_Name: up
-      m_Id: f042cd6a-66dc-4e4a-b9db-72ee8b757694
+      m_Id: 604017a3-cac9-4479-957a-b9ef58bc7775
       m_Path: <Keyboard>/w
       m_Interactions: 
       m_Processors: 
@@ -14306,7 +14306,7 @@ MonoBehaviour:
       m_Action: Player Controlls
       m_Flags: 8
     - m_Name: down
-      m_Id: 8309174a-c022-4e97-b1ea-995b9af3cb66
+      m_Id: 8eafb6f8-01a0-4e55-aea4-ba7066706bb6
       m_Path: <Keyboard>/s
       m_Interactions: 
       m_Processors: 
@@ -14314,7 +14314,7 @@ MonoBehaviour:
       m_Action: Player Controlls
       m_Flags: 8
     - m_Name: left
-      m_Id: d427f82c-9fe1-4a32-9892-d747da77f130
+      m_Id: 7895d5c9-e5e7-43bb-b651-7b8c65af29af
       m_Path: <Keyboard>/a
       m_Interactions: 
       m_Processors: 
@@ -14322,19 +14322,56 @@ MonoBehaviour:
       m_Action: Player Controlls
       m_Flags: 8
     - m_Name: right
-      m_Id: 8e9e9d43-cde6-4d07-b0de-74cc761d273d
+      m_Id: 7eebf70d-6739-4f4a-9a14-8fc41b3ff598
       m_Path: <Keyboard>/d
       m_Interactions: 
       m_Processors: 
       m_Groups: 
       m_Action: Player Controlls
       m_Flags: 8
+    - m_Name: 2D Vector arrows
+      m_Id: 5ccd6035-117b-4fc8-bdb7-12088eb305fb
+      m_Path: 2DVector
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Player Controlls
+      m_Flags: 4
+    - m_Name: up
+      m_Id: 26522b19-231e-4a82-9283-8bea8fba47e5
+      m_Path: <Keyboard>/upArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Player Controlls
+      m_Flags: 8
+    - m_Name: down
+      m_Id: 67de3a25-a37f-48eb-b915-63571881556c
+      m_Path: <Keyboard>/downArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Player Controlls
+      m_Flags: 8
+    - m_Name: left
+      m_Id: 590fddc8-b5cb-44f0-abd7-e4a646cfe902
+      m_Path: <Keyboard>/leftArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Player Controlls
+      m_Flags: 8
+    - m_Name: right
+      m_Id: 4083c8cf-a642-4202-a973-069483c86520
+      m_Path: <Keyboard>/rightArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Player Controlls
+      m_Flags: 8
     m_Flags: 0
-  runSpeed: 10
-  rotateSpeed: 0.5
-  groundClickLayer:
-    serializedVersion: 2
-    m_Bits: 2147483647
+  runSpeed: 1
+  rotateSpeed: 1
 --- !u!195 &1694632901
 NavMeshAgent:
   m_ObjectHideFlags: 0

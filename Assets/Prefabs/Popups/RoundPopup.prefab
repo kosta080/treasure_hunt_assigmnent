@@ -512,7 +512,7 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 21300000, guid: 047b929beb10565479851d39b452dfb6, type: 3}
+    m_PressedSprite: {fileID: 0}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
@@ -684,6 +684,13 @@ MonoBehaviour:
   headerText: {fileID: 4732607144133045680}
   hintText: {fileID: 4732607144699314113}
   roundData: {fileID: 11400000, guid: 524036f089ab84f47a2ecbffb2ef7b58, type: 2}
+  hingImageElement: {fileID: 4732607145091155883}
+  hintImages:
+  - {fileID: 21300000, guid: 6301c78ce0dd1cd478941b682e954c21, type: 3}
+  - {fileID: 21300000, guid: 8560b793a5a8cd54eb0cbbcadf08f219, type: 3}
+  - {fileID: 21300000, guid: b7449f78afac84b4993f343929a2ae0b, type: 3}
+  - {fileID: 21300000, guid: 887eb9ef55b3af64db81d8aed11d508a, type: 3}
+  - {fileID: 21300000, guid: b40cfe06e1d8a754683832cab16145e5, type: 3}
 --- !u!1 &4732607145071293522
 GameObject:
   m_ObjectHideFlags: 0
