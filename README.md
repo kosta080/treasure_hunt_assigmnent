@@ -19,3 +19,11 @@ https://assetstore.unity.com/packages/3d/props/interior/treasure-set-free-chest-
 Fantasy Wooden GUI  from the asset store 
 for the GUI elements 
 https://assetstore.unity.com/packages/2d/gui/fantasy-wooden-gui-free-103811 
+
+
+# Design desisions
+
+Camera controller - This component is setting up the position of the camera on each frame to follow the player in thisr person vue, to make eat easyer to set up the desired position and distance of the camera relative to the player this script is using the [ExecuteInEditMode] feature to make it the tweaking easyer.
+
+
+

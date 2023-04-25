@@ -18,10 +18,9 @@ namespace Scripts.Gameloop
                     childObject.gameObject.SetActive(false);
                 }
             }
-            hideAllChests();
         }
 
-        private void hideAllChests()
+        public void hideAllChests()
         {
             for (int i = 0; i < treasureChests.Count; i++)
             {

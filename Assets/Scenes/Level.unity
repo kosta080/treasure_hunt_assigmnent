@@ -3500,6 +3500,9 @@ MonoBehaviour:
   treasureController: {fileID: 1062530741}
   roundData: {fileID: 11400000, guid: 524036f089ab84f47a2ecbffb2ef7b58, type: 2}
   roundTimer: {fileID: 545781354}
+  FogOfWar: {fileID: 1686778901}
+  ShowHintPopups: 1
+  EnableFogOfWar: 0
 --- !u!1001 &468995468
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4184,8 +4187,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 522811750}
-  m_LocalRotation: {x: 0.1718019, y: -0.8223773, z: 0.32585126, w: 0.43359038}
-  m_LocalPosition: {x: 74.67, y: 41.36, z: 65.45}
+  m_LocalRotation: {x: -0.1962351, y: 0.7740204, z: -0.529136, w: -0.28705278}
+  m_LocalPosition: {x: 72.32, y: 45.86, z: 39.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4205,6 +4208,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 1694632899}
+  CamOffsetx: 4.73
+  CamOffsetz: 5.5
+  CamOffsety: 18.62
 --- !u!1 &545781353
 GameObject:
   m_ObjectHideFlags: 0
@@ -4245,7 +4251,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 27
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -5374,6 +5380,50 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4202130902894980, guid: 6910e2407cd484a42a0c2598114751a0, type: 3}
   m_PrefabInstance: {fileID: 638509999}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &639721066
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 639721067}
+  - component: {fileID: 639721068}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &639721067
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639721066}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1666518342}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &639721068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639721066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e090a98b810b77648915e89c4b0efe56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &645568371
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13790,6 +13840,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 467580193}
+  - {fileID: 639721067}
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14139,10 +14190,10 @@ GameObject:
   - component: {fileID: 1694632899}
   - component: {fileID: 1694632898}
   - component: {fileID: 1694632897}
-  - component: {fileID: 1694632901}
-  - component: {fileID: 1694632900}
   - component: {fileID: 1694632902}
   - component: {fileID: 1694632903}
+  - component: {fileID: 1694632901}
+  - component: {fileID: 1694632900}
   m_Layer: 3
   m_Name: Capsule
   m_TagString: Player

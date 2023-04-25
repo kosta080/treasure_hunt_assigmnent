@@ -1,3 +1,4 @@
+using Scripts.Gameloop;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
@@ -42,7 +43,7 @@ namespace Scripts.Player
 
 		private void Update()
 		{
-			//navMeshAgent.destination = target.position;
+			if (PopupSystem.Instance.activePopup) return;
 
 			if (inputMethod == inpotMethods.keyboard)
 			{

@@ -7,29 +7,51 @@ namespace Scripts.Gameloop
     {
         [SerializeField]
         private TreasureController treasureController;
-
         [SerializeField]
         private RoundDataModel roundData;
-
         [SerializeField]
         private Text roundTimer;
 
         private int chestCount;
         private int randomChest;
         private int randomChestStore;
-
         private float roundTime;
 
-        
+        public GameObject FogOfWar;
+
+        [Header("Game Settings")]
+        public bool ShowHintPopups;
+        public bool EnableFogOfWar;
 
         void Start()
         {
+            //Session preperation
             chestCount = treasureController.ChestCount;
+            chestPickability.TreasureFound += prepareRound;
+            roundData.RoundNumber = 0;
+
+            //Impliment game settings
+            if (FogOfWar!=null)
+            {
+                FogOfWar.SetActive(EnableFogOfWar);
+            }
+            
+            //Round Preperation
+            prepareRound();
+        }
+
+        private void prepareRound()
+        {
             chooseRandomChest();
             roundData.IncreaseRoundNumber();
-            //PopupSystem.Instance.ShowRoundPopup();
+            treasureController.hideAllChests();
             treasureController.ShowRandomChest(randomChest);
-            
+
+            //Derived from game settings
+            if (ShowHintPopups)
+            {
+                PopupSystem.Instance.ShowRoundPopup();
+            }
         }
 
         private void chooseRandomChest()
@@ -57,6 +79,5 @@ namespace Scripts.Gameloop
             }
 
         }
-
 	}
 }
