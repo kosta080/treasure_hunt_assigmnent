@@ -27,7 +27,7 @@ namespace Scripts.Gameloop
 
         public void ShowRoundPopup()
         {
-            Debug.Log("ShowRoundPopup()");
+            
             activePopup = (GameObject)Instantiate(roundPopup, popupCanvas);
         }
         public void CloseActivePopup()

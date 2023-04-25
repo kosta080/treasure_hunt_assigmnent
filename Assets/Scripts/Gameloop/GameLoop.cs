@@ -30,7 +30,7 @@ namespace Scripts.Gameloop
 
         void Start()
         {
-            Debug.Log("GameLoop");
+           
             //Session preperation
             chestCount = treasureController.ChestCount;
             chestPickability.TreasureFound += prepareRoundInDelay;

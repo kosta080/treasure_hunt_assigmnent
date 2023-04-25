@@ -7,21 +7,41 @@ namespace Scripts.Player
 {
 	public class PlayerMovement : MonoBehaviour
 	{
+		
 		public enum inpotMethods{keyboard, mouse}
-		public inpotMethods inputMethod = inpotMethods.keyboard;
 
-		[SerializeField]
-		private Transform target;
+		[Header("Input Method")]
+
+		public inpotMethods inputMethod = inpotMethods.keyboard;
 
 		[SerializeField]
 		private InputAction playerControlls;
 
 		[SerializeField]
+		private Transform targetPin;
+
+		[Header("Walking Params")]
+
+		[SerializeField]
 		private float stepSize;
+
 		[SerializeField]
 		private float rotateSpeed;
 
+		[SerializeField]
+		private Animator characterAnimator;
+
+		[SerializeField]
+		private GameObject StartPosition;
+
+		[SerializeField]
+		private float levelGimensionsX;	
+		[SerializeField]
+		private float levelGimensionsZ;
+
+
 		private NavMeshAgent navMeshAgent;
+		private Vector3 lastPosition = Vector3.zero;
 
 		private void OnEnable()
 		{
@@ -36,9 +56,14 @@ namespace Scripts.Player
 		{
 			navMeshAgent = GetComponent<NavMeshAgent>();
 		}
-
+		
 		private void Update()
 		{
+			//Calculate actual speed to determine which animation of the character to play
+			float speed = Vector3.Distance(transform.position, lastPosition) / Time.deltaTime;
+			lastPosition = transform.position;
+			characterAnimator.SetBool("Run", speed > 0.01);
+
 			if (PopupSystem.Instance.activePopup) return;
 
 			if (inputMethod == inpotMethods.keyboard)
@@ -61,11 +86,13 @@ namespace Scripts.Player
 						//Debug.Log("<color=red>"+ hit.point + "</color>");
 						navMeshAgent.updateRotation = true;
 						navMeshAgent.destination = hit.point;
-						target.position = hit.point;
+						targetPin.position = hit.point;
+						targetPin.GetComponent<ParticleSystem>().Emit(40);
 					}
 				}
 
 			}
 		}
+
 	}
 }

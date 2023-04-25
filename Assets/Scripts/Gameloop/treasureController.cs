@@ -10,7 +10,7 @@ namespace Scripts.Gameloop
         
         private void Awake()
         {
-            Debug.Log("Treasure controller");
+           
             foreach (Transform childObject in transform)
             {
                 if (childObject.GetComponent<chestPickability>())
