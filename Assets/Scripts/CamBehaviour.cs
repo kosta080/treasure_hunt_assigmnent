@@ -15,12 +15,17 @@ public class CamBehaviour : MonoBehaviour
     [Header("camera offset up down")]
     public float CamOffsety = 20f;
 
-    
-    void Update()
+	private void Start()
+	{
+        transform.LookAt(Player.position);
+    }
+	void Update()
     {
 
-        transform.LookAt(Player.position);
+        //transform.LookAt(Player.position);
         Vector3 camPos = new Vector3(Player.position.x + CamOffsetx, Player.position.y + CamOffsety, Player.position.z + CamOffsetz);
-        transform.position = camPos;
+        transform.position = Vector3.Lerp(transform.position, camPos, Time.deltaTime*5);
+
+        //transform.position = camPos;
     }
 }

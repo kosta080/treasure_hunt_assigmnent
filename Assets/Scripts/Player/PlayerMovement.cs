@@ -17,7 +17,7 @@ namespace Scripts.Player
 		private InputAction playerControlls;
 
 		[SerializeField]
-		private float runSpeed;
+		private float stepSize;
 		[SerializeField]
 		private float rotateSpeed;
 
@@ -46,7 +46,7 @@ namespace Scripts.Player
 				transform.Rotate(new Vector3(0f, playerControlls.ReadValue<Vector2>().x * rotateSpeed, 0f), Space.Self);
 
 				navMeshAgent.updateRotation = false;
-				navMeshAgent.destination = transform.position + (transform.forward * playerControlls.ReadValue<Vector2>().y * runSpeed);
+				navMeshAgent.destination = transform.position + (transform.forward * playerControlls.ReadValue<Vector2>().y * stepSize);
 			}
 
 			if (inputMethod == inpotMethods.mouse)

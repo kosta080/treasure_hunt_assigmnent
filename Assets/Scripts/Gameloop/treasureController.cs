@@ -8,8 +8,9 @@ namespace Scripts.Gameloop
         private List<Transform> treasureChests = new List<Transform>();
 
         
-        private void Start()
+        private void Awake()
         {
+            Debug.Log("Treasure controller");
             foreach (Transform childObject in transform)
             {
                 if (childObject.GetComponent<chestPickability>())
