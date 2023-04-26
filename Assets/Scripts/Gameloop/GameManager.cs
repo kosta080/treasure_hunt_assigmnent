@@ -1,13 +1,25 @@
+using Scripts.Player;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Scripts.Gameloop
 {
-    public class GameLoop : MonoBehaviour
+    public class GameManager : MonoBehaviour
     {
+        public GameObject FogOfWar;
+
+        [Header("Game Settings")]
+        public bool ShowHintPopups;
+        public bool EnableFogOfWar;
+        public float sessionTime;
+        public float timeBonus;
+
         [SerializeField]
         private TreasureController treasureController;
+
+        [SerializeField]
+        private PlayerMovement playerMovement;
 
         [SerializeField]
         private RoundDataModel roundData;
@@ -18,32 +30,38 @@ namespace Scripts.Gameloop
         private int chestCount;
         private int randomChest;
         private int randomChestStore;
-        
 
-        public GameObject FogOfWar;
+        private int RandRetrys = 0;
+        private int RandRetrys_max = 100;
 
-        [Header("Game Settings")]
-        public bool ShowHintPopups;
-        public bool EnableFogOfWar;
-        public float sessionTime;
-        public float timeBonus;
+        public static GameManager Instance { get; private set; }
+        private void Awake()
+        {
+            if (Instance != null && Instance != this)
+                Destroy(this);
+
+            else
+                Instance = this;
+        }
 
         void Start()
         {
-           
-            //Session preperation
+            initSession();
+            useGameSettings();
+            initRound();
+        }
+        private void initSession()
+        {
             chestCount = treasureController.ChestCount;
             chestPickability.TreasureFound += handleTreasureFound;
             roundData.RoundNumber = 0;
-
-            //Impliment game settings
-            if (FogOfWar!=null)
+        }
+        private void useGameSettings()
+        {
+            if (FogOfWar != null)
             {
                 FogOfWar.SetActive(EnableFogOfWar);
             }
-            
-            //Round Preperation
-            prepareRound();
         }
         private void handleTreasureFound()
         {
@@ -52,10 +70,11 @@ namespace Scripts.Gameloop
         }
         private IEnumerator waitAndPrepareRound()
         {
+            //get animation duration ...
             yield return new WaitForSeconds(2f);
-            prepareRound();
+            initRound();
         }
-        private void prepareRound()
+        private void initRound()
         {
             chooseRandomChest();
             roundData.ChestIndex = randomChest;
@@ -66,12 +85,10 @@ namespace Scripts.Gameloop
             //Derived from game settings
             if (ShowHintPopups)
             {
-                PopupSystem.Instance.ShowRoundPopup();
+                PopupSystem.Instance.ShowPopup("Round");
             }
         }
 
-        int RandRetrys = 0;
-        int RandRetrys_max = 100;
         private void chooseRandomChest()
         {
             if (chestCount < 2)
@@ -80,6 +97,7 @@ namespace Scripts.Gameloop
                 return;
             }
             //generate random number that is different from the previously generated one
+            //replace this with shuffle
             RandRetrys = 0;
             while (randomChestStore == randomChest && RandRetrys < RandRetrys_max)
             {
@@ -92,9 +110,10 @@ namespace Scripts.Gameloop
 		private void Update()
 		{
             //timer should not run if popup is showing or if round did not start yet
-            if (PopupSystem.Instance.activePopup)
-                return;
+            //prevent this if
+            //if (PopupSystem.Instance.activePopup)                return;
 
+            
             sessionTime -= Time.deltaTime;
             int minutes = (int)Mathf.Floor(sessionTime / 60);
             int seconds = (int)sessionTime % 60;
@@ -109,5 +128,16 @@ namespace Scripts.Gameloop
         {
             sessionTime += timeBonus;
         }
-	}
+
+        public void PauseGame()
+        {
+            Time.timeScale = 0;
+            playerMovement.enabled = false;
+        }
+        public void UnPauseGame()
+        {
+            Time.timeScale = 1;
+            playerMovement.enabled = true;
+        }
+    }
 }

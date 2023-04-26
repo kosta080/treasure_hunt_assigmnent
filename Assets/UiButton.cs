@@ -5,6 +5,6 @@ public class UiButton : MonoBehaviour
 {
     public void OpenHintPopup()
     {
-        PopupSystem.Instance.ShowRoundPopup();
+        PopupSystem.Instance.ShowPopup("Round");
     }
 }

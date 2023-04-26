@@ -8,10 +8,15 @@ namespace Scripts.Player
 	public class PlayerMovement : MonoBehaviour
 	{
 		
-		public enum inpotMethods{keyboard, mouse}
+		
+		public enum inpotMethods
+		{
+			keyboard, 
+			mouse
+		}
 
+		//enums uppercase
 		[Header("Input Method")]
-
 		public inpotMethods inputMethod = inpotMethods.keyboard;
 
 		[SerializeField]
@@ -34,15 +39,6 @@ namespace Scripts.Player
 		[SerializeField]
 		private AudioSource characterAudioSource;
 
-		[SerializeField]
-		private GameObject StartPosition;
-
-		[SerializeField]
-		private float levelGimensionsX;	
-		[SerializeField]
-		private float levelGimensionsZ;
-
-
 		private NavMeshAgent navMeshAgent;
 		private Vector3 lastPosition = Vector3.zero;
 
@@ -62,16 +58,19 @@ namespace Scripts.Player
 		
 		private void Update()
 		{
-			//Calculate actual speed to determine which animation of the character to play
+			//updateCharacterAnimationSound();
 			float speed = Vector3.Distance(transform.position, lastPosition) / Time.deltaTime;
 			lastPosition = transform.position;
 			characterAnimator.SetBool("Run", speed > 0.01);
 			characterAudioSource.enabled = speed > 0.01;
 
-			if (PopupSystem.Instance.activePopup) return;
+			//solve this if
+			//if (PopupSystem.Instance.activePopup) return;
+
 
 			if (inputMethod == inpotMethods.keyboard)
 			{
+				//updateKeyboardMovement();
 				transform.Rotate(new Vector3(0f, playerControlls.ReadValue<Vector2>().x * rotateSpeed, 0f), Space.Self);
 
 				navMeshAgent.updateRotation = false;
@@ -80,6 +79,7 @@ namespace Scripts.Player
 
 			if (inputMethod == inpotMethods.mouse)
 			{
+				//updateMouseMovement();
 				if (Input.GetMouseButtonDown(0))
 				{
 					Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
