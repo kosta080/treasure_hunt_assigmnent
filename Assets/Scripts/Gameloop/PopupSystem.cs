@@ -57,6 +57,7 @@ namespace Scripts.Gameloop
 
         public void CloseActivePopup()
         {
+            Debug.Log("CloseActivePopup");
             GameManager.Instance.UnPauseGame();
             Destroy(activePopup);
         }

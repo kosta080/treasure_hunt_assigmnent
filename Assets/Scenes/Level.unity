@@ -1781,6 +1781,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wizard
       objectReference: {fileID: 0}
+    - target: {fileID: 1110153572470110396, guid: f32512cb91e0d9648b47540a45c32267, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f32512cb91e0d9648b47540a45c32267, type: 3}
 --- !u!4 &195226493 stripped
@@ -4678,7 +4682,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 511046472}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: e1a896618827c754c871bb32a604f23e, type: 3}
@@ -4911,8 +4915,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 522811750}
-  m_LocalRotation: {x: -0.17723341, y: 0.7793045, z: -0.5450252, w: -0.25341722}
-  m_LocalPosition: {x: 71.59, y: 42.949394, z: 39.95}
+  m_LocalRotation: {x: -0.22699839, y: 0.74379075, z: -0.5480226, w: -0.3080882}
+  m_LocalPosition: {x: 70.99, y: 39.82939, z: 37.850002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4932,9 +4936,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 1694632899}
-  CamOffsetx: 4
-  CamOffsetz: 5.5
-  CamOffsety: 18.62
+  CamOffsetx: 3.4
+  CamOffsetz: 3.4
+  CamOffsety: 15.5
 --- !u!1 &545781353
 GameObject:
   m_ObjectHideFlags: 0
@@ -6280,6 +6284,7 @@ MonoBehaviour:
   soundeffectsAudioSource: {fileID: 721107919}
   music: {fileID: 8300000, guid: 3e978df33cc7a2c4db4ca0796ea784e6, type: 3}
   chestOpening: {fileID: 8300000, guid: 96f414ea0b3968440bd048b93325820f, type: 3}
+  sfx: {fileID: 1376811544175677203, guid: 18a61e752bedf3d48a5d41c283fa66ee, type: 3}
 --- !u!1001 &645568371
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9833,7 +9838,7 @@ GameObject:
   - component: {fileID: 1063531000}
   m_Layer: 0
   m_Name: Music Source
-  m_TagString: Untagged
+  m_TagString: Music
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14987,7 +14992,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1686778902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15002,7 +15007,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fogRevealers:
   - revealerTransform: {fileID: 1694632899}
-    sightRange: 10
+    sightRange: 8
     updateOnlyOnMove: 0
     lastSeenAt: {x: 0, y: 0}
   levelMidPoint: {fileID: 1543259890}

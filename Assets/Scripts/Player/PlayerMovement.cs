@@ -54,12 +54,16 @@ namespace Scripts.Player
 		private void Awake()
 		{
 			navMeshAgent = GetComponent<NavMeshAgent>();
+			lastPosition = transform.position;
 		}
 		
 		private void Update()
 		{
 			//updateCharacterAnimationSound();
-			float speed = Vector3.Distance(transform.position, lastPosition) / Time.deltaTime;
+			//speed on ground ignoring y
+			Vector3 tpos = new Vector3(transform.position.x, 0, transform.position.z);
+			Vector3 lpos = new Vector3(lastPosition.x, 0, lastPosition.z);
+			float speed = Vector3.Distance(tpos, lpos) / Time.deltaTime;
 			lastPosition = transform.position;
 			characterAnimator.SetBool("Run", speed > 0.01);
 			characterAudioSource.enabled = speed > 0.01;

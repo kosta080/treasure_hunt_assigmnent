@@ -1,3 +1,4 @@
+using Scripts.Infra;
 using Scripts.Player;
 using System.Collections;
 using UnityEngine;
@@ -46,6 +47,7 @@ namespace Scripts.Gameloop
 
         void Start()
         {
+            SoundManager.Instance.OnStart();
             initSession();
             useGameSettings();
             initRound();
@@ -133,11 +135,13 @@ namespace Scripts.Gameloop
         {
             Time.timeScale = 0;
             playerMovement.enabled = false;
+            SoundManager.SoundeffectsEnabled(false);
         }
         public void UnPauseGame()
         {
             Time.timeScale = 1;
             playerMovement.enabled = true;
+            SoundManager.SoundeffectsEnabled(true);
         }
     }
 }
