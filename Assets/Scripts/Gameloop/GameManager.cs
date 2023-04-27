@@ -46,8 +46,10 @@ namespace Scripts.Gameloop
 
             else
                 Instance = this;
-        }
 
+            Application.targetFrameRate = 120;
+        }
+        
         void Start()
         {
             SoundManager.Instance.OnStart();
