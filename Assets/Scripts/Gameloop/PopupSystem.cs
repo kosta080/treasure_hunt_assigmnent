@@ -18,12 +18,11 @@ namespace Scripts.Gameloop
         private Transform popupCanvas;
 
         [SerializeField]
+        private List<popup> popups;
+
         private GameObject roundPopup;
 
-        public GameObject activePopup;
-
-        [SerializeField]
-        private List<popup> popups;
+        private GameObject activePopup;
 
         public static PopupSystem Instance { get; private set; }
         private void Awake()
@@ -48,7 +47,7 @@ namespace Scripts.Gameloop
                 if (popups[i].Name == popupName)
                 {
                     GameManager.Instance.PauseGame();
-                    activePopup = Instantiate(roundPopup, popupCanvas);
+                    activePopup = Instantiate(popups[i].Object, popupCanvas);
                     return;
                 }
             }

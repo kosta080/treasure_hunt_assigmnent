@@ -16,6 +16,9 @@ namespace Scripts.Gameloop
         public float sessionTime;
         public float timeBonus;
 
+
+        private float secondsPlayed;
+
         [SerializeField]
         private TreasureController treasureController;
 
@@ -56,7 +59,7 @@ namespace Scripts.Gameloop
         {
             chestCount = treasureController.ChestCount;
             chestPickability.TreasureFound += handleTreasureFound;
-            roundData.RoundNumber = 0;
+            roundData.InitSessionData();
         }
         private void useGameSettings()
         {
@@ -68,6 +71,7 @@ namespace Scripts.Gameloop
         private void handleTreasureFound()
         {
             GiveTimeBonus();
+            roundData.IncreaseTreasuresFound();
             StartCoroutine(waitAndPrepareRound());
         }
         private IEnumerator waitAndPrepareRound()
@@ -117,6 +121,13 @@ namespace Scripts.Gameloop
 
             
             sessionTime -= Time.deltaTime;
+            secondsPlayed += Time.deltaTime;
+            if (sessionTime < 0)
+            {
+                sessionTime = 0;
+                roundData.StoreSecondsPlayed(secondsPlayed);
+                PopupSystem.Instance.ShowPopup("Summary");
+            }
             int minutes = (int)Mathf.Floor(sessionTime / 60);
             int seconds = (int)sessionTime % 60;
             int totalSeconds = (int)Mathf.Floor(sessionTime);
@@ -125,6 +136,7 @@ namespace Scripts.Gameloop
             {
                 roundTimer.text = totalSeconds.ToString();
             }
+            
         }
         private void GiveTimeBonus()
         {
