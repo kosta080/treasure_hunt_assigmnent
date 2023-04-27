@@ -30,6 +30,7 @@ public class RoundPopupFill : MonoBehaviour
             Debug.Log("There is no hint image for this treasure spawn, a generic hing image will be shown");
             hintText.text = "There is no hint";
             hingImageElement.sprite = questionmark;
+            return;
         }
 		
         hintText.text = "Hint "+ roundData.ChestIndex.ToString();
