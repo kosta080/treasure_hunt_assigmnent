@@ -204,12 +204,18 @@ namespace FischlWorks_FogWar
         [SerializeField]
         [Range(0, 1)]
         private float fogPlaneAlpha = 1;
+
+        [SerializeField]
+        private bool lerpFogOpacity = true;
+
         [SerializeField]
         [Range(0, 1)]
-        private float fogLerpSpeed = 0.01f;
+        private float fogLerpSpeed = 0.1f;
+
         [Header("Debug")]
         [SerializeField]
         private Texture2D fogPlaneTextureLerpTarget = null;
+
         [SerializeField]
         private Texture2D fogPlaneTextureLerpBuffer = null;
 
@@ -229,6 +235,11 @@ namespace FischlWorks_FogWar
         [SerializeField]
         [Range(1, 300)]
         private int levelDimensionY = 11;
+
+        [SerializeField]
+        [Range(1, 10)]
+        public int PixelsBind = 2;
+
         [SerializeField]
         private float unitScale = 1;
         public float _UnitScale => unitScale;
@@ -248,6 +259,7 @@ namespace FischlWorks_FogWar
         private bool drawGizmos = false;
         [SerializeField]
         private bool LogOutOfRange = false;
+    
 
         // External shadowcaster module
         public Shadowcaster shadowcaster { get; private set; } = new Shadowcaster();
@@ -467,16 +479,27 @@ namespace FischlWorks_FogWar
 
 
         // Doing shader business on the script, if we pull this out as a shader pass, same operations must be repeated
+
         private void UpdateFogPlaneTextureBuffer()
         {
-            for (int xIterator = 0; xIterator < levelDimensionX; xIterator++)
+            for (int xIterator = 0; xIterator < levelDimensionX; xIterator += PixelsBind)
             {
-                for (int yIterator = 0; yIterator < levelDimensionY; yIterator++)
+                for (int yIterator = 0; yIterator < levelDimensionY; yIterator += PixelsBind)
                 {
-                    fogPlaneTextureLerpBuffer.SetPixel(xIterator, yIterator, Color.Lerp(
-                        fogPlaneTextureLerpBuffer.GetPixel(xIterator, yIterator),
-                        fogPlaneTextureLerpTarget.GetPixel(xIterator, yIterator),
-                        fogLerpSpeed));
+                    //if (xIterator == xIterator && yIterator == yIterator) return;
+                    if (lerpFogOpacity)
+                    {
+                        Color colorCalc = Color.Lerp(fogPlaneTextureLerpBuffer.GetPixel(xIterator, yIterator), fogPlaneTextureLerpTarget.GetPixel(xIterator, yIterator), fogLerpSpeed);
+                        for (int i=0;i< PixelsBind; i++) {
+                            fogPlaneTextureLerpBuffer.SetPixel(xIterator+i, yIterator+i, colorCalc);
+                        }
+
+                    }
+                    else
+                    {
+                        fogPlaneTextureLerpBuffer.SetPixel(xIterator, yIterator, fogPlaneTextureLerpTarget.GetPixel(xIterator, yIterator));
+                    }
+
                 }
             }
 

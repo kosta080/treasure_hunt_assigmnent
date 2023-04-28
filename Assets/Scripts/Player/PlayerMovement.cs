@@ -12,7 +12,8 @@ namespace Scripts.Player
 		public enum inpotMethods
 		{
 			keyboard, 
-			mouse
+			mouse,
+			gui
 		}
 
 		//enums uppercase
@@ -59,7 +60,27 @@ namespace Scripts.Player
 		
 		private void Update()
 		{
-			//updateCharacterAnimationSound();
+			updateCharacterAnimationSound();
+			
+			//solve this if
+			//if (PopupSystem.Instance.activePopup) return;
+
+			if (inputMethod == inpotMethods.keyboard)
+			{
+				updateKeyboardMovement();
+			}
+			else if (inputMethod == inpotMethods.mouse)
+			{
+				updateMouseMovement();
+			}
+			else if (inputMethod == inpotMethods.gui)
+			{
+				updateGuiMovement();
+			}
+		}
+
+		private void updateCharacterAnimationSound()
+		{
 			//speed on ground ignoring y
 			Vector3 tpos = new Vector3(transform.position.x, 0, transform.position.z);
 			Vector3 lpos = new Vector3(lastPosition.x, 0, lastPosition.z);
@@ -67,42 +88,40 @@ namespace Scripts.Player
 			lastPosition = transform.position;
 			characterAnimator.SetBool("Run", speed > 0.01);
 			characterAudioSource.enabled = speed > 0.01;
+		}
+		private void updateKeyboardMovement()
+		{
+			transform.Rotate(new Vector3(0f, playerControlls.ReadValue<Vector2>().x * rotateSpeed, 0f), Space.Self);
 
-			//solve this if
-			//if (PopupSystem.Instance.activePopup) return;
-
-
-			if (inputMethod == inpotMethods.keyboard)
+			navMeshAgent.updateRotation = false;
+			navMeshAgent.destination = transform.position + (transform.forward * playerControlls.ReadValue<Vector2>().y * stepSize);
+		}
+		private void updateMouseMovement()
+		{
+			if (Input.GetMouseButtonDown(0))
 			{
-				//updateKeyboardMovement();
-				transform.Rotate(new Vector3(0f, playerControlls.ReadValue<Vector2>().x * rotateSpeed, 0f), Space.Self);
+				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+				RaycastHit hit;
 
-				navMeshAgent.updateRotation = false;
-				navMeshAgent.destination = transform.position + (transform.forward * playerControlls.ReadValue<Vector2>().y * stepSize);
-			}
-
-			if (inputMethod == inpotMethods.mouse)
-			{
-				//updateMouseMovement();
-				if (Input.GetMouseButtonDown(0))
+				if (Physics.Raycast(ray, out hit, Mathf.Infinity))
 				{
-					Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-					RaycastHit hit;
+					if (hit.transform.tag != "WalkTarget")
+						return;
 
-					if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-					{
-						if (hit.transform.tag != "WalkTarget")
-							return;
-
-						navMeshAgent.updateRotation = true;
-						navMeshAgent.destination = hit.point;
-						targetPin.position = hit.point;
-						targetPin.GetComponent<ParticleSystem>().Emit(40);
-					}
+					navMeshAgent.updateRotation = true;
+					navMeshAgent.destination = hit.point;
+					targetPin.position = hit.point;
+					targetPin.GetComponent<ParticleSystem>().Emit(40);
 				}
-
 			}
 		}
+		private void updateGuiMovement()
+		{
+			transform.Rotate(new Vector3(0f, GuiInput.Instance.getAxies().x * rotateSpeed, 0f), Space.Self);
+			navMeshAgent.updateRotation = false;
+			navMeshAgent.destination = transform.position + (transform.forward * GuiInput.Instance.getAxies().y * stepSize);
+		}
+		/*--*/
 
 	}
 }
