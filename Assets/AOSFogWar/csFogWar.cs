@@ -486,7 +486,6 @@ namespace FischlWorks_FogWar
             {
                 for (int yIterator = 0; yIterator < levelDimensionY; yIterator += PixelsBind)
                 {
-                    //if (xIterator == xIterator && yIterator == yIterator) return;
                     if (lerpFogOpacity)
                     {
                         Color colorCalc = Color.Lerp(fogPlaneTextureLerpBuffer.GetPixel(xIterator, yIterator), fogPlaneTextureLerpTarget.GetPixel(xIterator, yIterator), fogLerpSpeed);
