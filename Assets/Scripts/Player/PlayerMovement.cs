@@ -7,18 +7,16 @@ namespace Scripts.Player
 {
 	public class PlayerMovement : MonoBehaviour
 	{
-		
-		
-		public enum inpotMethods
+
+		public enum InputMethods
 		{
 			keyboard, 
 			mouse,
 			gui
 		}
 
-		//enums uppercase
 		[Header("Input Method")]
-		public inpotMethods inputMethod = inpotMethods.keyboard;
+		public InputMethods InputMethod = InputMethods.keyboard;
 
 		[SerializeField]
 		private InputAction playerControlls;
@@ -65,15 +63,15 @@ namespace Scripts.Player
 			//solve this if
 			//if (PopupSystem.Instance.activePopup) return;
 
-			if (inputMethod == inpotMethods.keyboard)
+			if (InputMethod == InputMethods.keyboard)
 			{
 				updateKeyboardMovement();
 			}
-			else if (inputMethod == inpotMethods.mouse)
+			else if (InputMethod == InputMethods.mouse)
 			{
 				updateMouseMovement();
 			}
-			else if (inputMethod == inpotMethods.gui)
+			else if (InputMethod == InputMethods.gui)
 			{
 				updateGuiMovement();
 			}
