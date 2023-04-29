@@ -1,11 +1,15 @@
 
+using Scripts.Player;
 using UnityEngine;
-using UnityEngine.UI;
+using System;
+using System.Collections.Generic;
 
 public class GuiInput : MonoBehaviour
 {
-    Vector2 axies;
+    private Vector2 axies;
 
+    [SerializeField]
+    private List<GameObject> guiInputElements;
     public void UpPress()    
     {
         axies.y = 1;
@@ -42,6 +46,19 @@ public class GuiInput : MonoBehaviour
     // Update is called once per frame
 
     public static GuiInput Instance { get; private set; }
+
+    public void showGI(bool visibility)
+    {
+        foreach (GameObject obj in guiInputElements)
+        {
+            obj.SetActive(visibility);
+        }
+    }
+
+    public Vector2 getAxies()
+    {
+        return axies;
+    }
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -49,10 +66,6 @@ public class GuiInput : MonoBehaviour
 
         else
             Instance = this;
-    }
-    public Vector2 getAxies()
-    {
-        return axies;
     }
 
 }

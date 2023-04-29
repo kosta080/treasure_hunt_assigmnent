@@ -39,6 +39,20 @@ namespace Scripts.Gameloop
         private int RandRetrys_max = 100;
 
         public static GameManager Instance { get; private set; }
+
+        public void PauseGame()
+        {
+            Time.timeScale = 0;
+            playerMovement.enabled = false;
+            SoundManager.SoundeffectsEnabled(false);
+        }
+        public void UnPauseGame()
+        {
+            Time.timeScale = 1;
+            playerMovement.enabled = true;
+            SoundManager.SoundeffectsEnabled(true);
+        }
+
         private void Awake()
         {
             if (Instance != null && Instance != this)
@@ -49,8 +63,8 @@ namespace Scripts.Gameloop
 
             Application.targetFrameRate = 120;
         }
-        
-        void Start()
+
+        private void Start()
         {
             SoundManager.Instance.OnStart();
             initSession();
@@ -117,11 +131,10 @@ namespace Scripts.Gameloop
 
 		private void Update()
 		{
-            //timer should not run if popup is showing or if round did not start yet
-            //prevent this if
-            //if (PopupSystem.Instance.activePopup)                return;
-
-            
+            updateTimer();
+        }
+        private void updateTimer()
+        {
             sessionTime -= Time.deltaTime;
             secondsPlayed += Time.deltaTime;
             if (sessionTime < 0)
@@ -138,24 +151,12 @@ namespace Scripts.Gameloop
             {
                 roundTimer.text = totalSeconds.ToString();
             }
-            
         }
         private void GiveTimeBonus()
         {
             sessionTime += timeBonus;
         }
 
-        public void PauseGame()
-        {
-            Time.timeScale = 0;
-            playerMovement.enabled = false;
-            SoundManager.SoundeffectsEnabled(false);
-        }
-        public void UnPauseGame()
-        {
-            Time.timeScale = 1;
-            playerMovement.enabled = true;
-            SoundManager.SoundeffectsEnabled(true);
-        }
+
     }
 }

@@ -1,4 +1,4 @@
-using Scripts.Gameloop;
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
@@ -7,9 +7,9 @@ namespace Scripts.Player
 {
 	public class PlayerMovement : MonoBehaviour
 	{
-
 		public enum InputMethods
 		{
+			none,
 			keyboard, 
 			mouse,
 			gui
@@ -17,6 +17,8 @@ namespace Scripts.Player
 
 		[Header("Input Method")]
 		public InputMethods InputMethod = InputMethods.keyboard;
+
+		private InputMethods oldInputMethod = InputMethods.none;
 
 		[SerializeField]
 		private InputAction playerControlls;
@@ -58,6 +60,11 @@ namespace Scripts.Player
 		
 		private void Update()
 		{
+			if (oldInputMethod != InputMethod)
+			{
+				GuiInput.Instance.showGI(InputMethod == InputMethods.gui);
+				oldInputMethod = InputMethod;
+			}
 			updateCharacterAnimationSound();
 			
 			//solve this if
