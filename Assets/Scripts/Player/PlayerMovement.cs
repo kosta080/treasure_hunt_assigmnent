@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 namespace Scripts.Player
@@ -10,7 +12,7 @@ namespace Scripts.Player
 		public enum InputMethods
 		{
 			none,
-			keyboard, 
+			keyboard,
 			mouse,
 			gui
 		}
@@ -39,6 +41,16 @@ namespace Scripts.Player
 
 		[SerializeField]
 		private AudioSource characterAudioSource;
+
+		[SerializeField]
+		[Range(0,0.20f)]
+		private float topTouchGap;
+		[SerializeField]
+		[Range(0, 0.20f)]
+		private float leftTouchGap;
+		[SerializeField]
+		[Range(0, 0.20f)]
+		private float rightTouchGap;
 
 		private NavMeshAgent navMeshAgent;
 		private Vector3 lastPosition = Vector3.zero;
@@ -105,11 +117,31 @@ namespace Scripts.Player
 		{
 			if (Input.GetMouseButtonDown(0))
 			{
+				//ignore screen edges Screen.height is used for left and right edges intentionally because the UI is scaling according to height.
+				float sh = Screen.height;
+				float sw = Screen.width;
+				if (Input.mousePosition.y > sh * (1 - topTouchGap))
+				{
+					Debug.Log("out 1");
+					return;
+				}
+				if (Input.mousePosition.x < sh * leftTouchGap)
+				{
+					Debug.Log("out 2");
+					return;
+				}
+				if (Input.mousePosition.x > sw - (sh * rightTouchGap))
+				{
+					Debug.Log("out 3");
+					return;
+				}
+
 				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 				RaycastHit hit;
 
 				if (Physics.Raycast(ray, out hit, Mathf.Infinity))
 				{
+					Debug.Log(hit.transform.name);
 					if (hit.transform.tag != "WalkTarget")
 						return;
 
@@ -120,6 +152,7 @@ namespace Scripts.Player
 				}
 			}
 		}
+		
 		private void updateGuiMovement()
 		{
 			transform.Rotate(new Vector3(0f, GuiInput.Instance.getAxies().x * rotateSpeed, 0f), Space.Self);

@@ -1,3 +1,4 @@
+using Scripts.Data;
 using Scripts.Infra;
 using Scripts.Player;
 using System.Collections;
