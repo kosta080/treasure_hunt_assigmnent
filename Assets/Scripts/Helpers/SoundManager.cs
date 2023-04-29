@@ -30,8 +30,11 @@ namespace Scripts.Infra
             allAudioSources = FindObjectsOfType<AudioSource>();
             Debug.Log(allAudioSources.Length + " AudioSource found in snene");
         }
-
-        public void playUiClick()
+		private void OnDestroy()
+		{
+            chestPickability.TreasureFound -= playCollectSound;
+        }
+		public void playUiClick()
         {
             createAndPlaySound(uiClick);
         }

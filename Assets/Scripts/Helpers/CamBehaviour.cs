@@ -33,7 +33,7 @@ namespace Scripts.Helpers.cam
 
         private void Start()
         {
-            transform.LookAt(Player.position);
+            tpCamera.transform.LookAt(Player.position);
         }
         void Update()
         {
@@ -47,7 +47,7 @@ namespace Scripts.Helpers.cam
             }
             //transform.LookAt(Player.position);
             Vector3 camPos = new Vector3(Player.position.x + CamOffsetx, Player.position.y + CamOffsety, Player.position.z + CamOffsetz);
-            transform.position = Vector3.Lerp(transform.position, camPos, Time.deltaTime * 5);
+            tpCamera.transform.position = Vector3.Lerp(tpCamera.transform.position, camPos, Time.deltaTime * 5);
 
             //transform.position = camPos;
         }

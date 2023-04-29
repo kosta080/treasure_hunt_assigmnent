@@ -148,7 +148,7 @@ namespace Scripts.Player
 					navMeshAgent.updateRotation = true;
 					navMeshAgent.destination = hit.point;
 					targetPin.position = hit.point;
-					targetPin.GetComponent<ParticleSystem>().Emit(40);
+					targetPin.GetComponent<ParticleSystem>().Emit(90);
 				}
 			}
 		}

@@ -64,8 +64,11 @@ namespace Scripts.Gameloop
 
             Application.targetFrameRate = 120;
         }
-
-        private void Start()
+		private void OnDestroy()
+		{
+            chestPickability.TreasureFound -= handleTreasureFound;
+        }
+		private void Start()
         {
             SoundManager.Instance.OnStart();
             initSession();
