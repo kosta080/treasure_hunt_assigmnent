@@ -1,6 +1,4 @@
-# treasure_hunt_assigmnent
-Treasure hung game
-
+Treasure hung assigmnent game
 
 ### **Assets used**
 
