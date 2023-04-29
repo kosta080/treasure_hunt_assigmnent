@@ -379,6 +379,7 @@ namespace FischlWorks_FogWar
             fogPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
 
             fogPlane.name = "[RUNTIME] Fog_Plane";
+            fogPlane.layer = LayerMask.NameToLayer("HideFpv");
 
             fogPlane.transform.position = new Vector3(
                 levelMidPoint.position.x,
